@@ -10,13 +10,21 @@ const App = (props) => {
     destroyed: false,
   });
 
+  // *****************************************************************************************************
+  // The below is a solution to stopping having to keep updating the state like this ...state, side:side
+  // *****************************************************************************************************
+
+  // const [destroyed, setDestroyed] = useState(false);
+  // const [selectedCharacter, setSelectedCharacter] = useState(1)
+  // const [chosenSide, setChosenSide] = useState('light');
+
   const sideHandler = (side) => {
-    setState({ side: side });
+    setState({ ...state, side: side });
   };
 
   const charSelectHandler = (event) => {
     const charId = event.target.value;
-    setState({ selectedCharacter: charId });
+    setState({ ...state, selectedCharacter: charId });
   };
 
   const destructionHandler = () => {
