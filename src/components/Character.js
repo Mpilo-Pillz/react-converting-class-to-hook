@@ -6,6 +6,7 @@ const Character = (props) => {
   const [loadedCharacter, setLoadedCharacter] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log("comment out memo comment in the normal export defautl to see this everytime comp updates");
   const fetchData = () => {
     console.log(
       'Sending Http request for new character with id ' +
@@ -56,12 +57,16 @@ const Character = (props) => {
   // }
 
   useEffect(() => {
+    console.log("use effect ran");
     fetchData();
-  }, [])
 
+    return () => {
+      // remove listerners here
+      console.log('Too soon...cleaning up'); // componentWillUnmount()
+    }
+  }, [props.selectedChar]) //componentDidUpdate ComponentDidMount
 
-
-
+  useEffect(() => console.log('component will unmount'), [])
   // componentWillUnmount() {
   //   console.log('Too soon...');
   // }
@@ -85,4 +90,10 @@ const Character = (props) => {
   return content;
 }
 
-export default Character;
+export default React.memo(Character); // shouldComponentUpdate
+// export default React.memo(Character, (prevProps, nextProps) => {
+//   console.log('shouldComponentUpdate, do the condition opposite of what the class version does');
+//   return (nextProps.selectedChar === prevProps.selectedChar)
+// }); // shouldComponentUpdate
+// export default React.memo(Character); // shouldComponentUpdate
+// export default Character; // shouldComponentUpdate
