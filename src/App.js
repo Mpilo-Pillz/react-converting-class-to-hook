@@ -18,7 +18,7 @@ const App = (props) => {
   // *********************************************************************************************************
 
   const [destroyed, setDestroyed] = useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState("2");
+  const [selectedCharacter, setSelectedCharacter] = useState(1);
   const [chosenSide, setChosenSide] = useState("light");
 
   const sideHandler = (side) => {
